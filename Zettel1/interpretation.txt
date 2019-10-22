@@ -1,0 +1,11 @@
+A1:
+Interpretation: Halbierung der Schrittweite kann den Unterschied
+zwischen Chaos und Lösung darstellen. Bei zu kleiner Schrittweite
+findet eine Oszillation zwischen Funktionswerten statt.
+
+
+A2:
+Die Schrittweite von 0.05 führt beim Euler-Verfahren ab bestimmten
+Funktionswerten zu einer Oszillation. Das Heun-Verfahren ist stabiler,
+sodass solche Effekte bei gleicher Schrittweite nicht auftauchen.
+
