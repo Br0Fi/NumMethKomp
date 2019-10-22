@@ -14,8 +14,6 @@ from scipy import optimize
 import glob
 import os
 
-import periodic
-
 
 # Konstanten fuer einheitliche Darstellung
 
@@ -40,15 +38,15 @@ grad = 1/rad
 
 def ff(t, x):
     return t-x**2
-    
+
 def euler(aa, bb, hh, x_0, ff, tt, meshpoints):
-    
+
     xx = np.zeros(meshpoints)
     xx[0] = x_0
     for i in range(1, meshpoints):
         xx[i] = xx[i-1] + hh * ff(tt[i], xx[i-1])
     return xx
-    
+
 aa = 0.0
 bb = 9.0
 hh = 0.05
@@ -56,7 +54,7 @@ x_0 = [-0.7, 0.0, 1.0, 3.0]
 
 fig = plt.figure(figsize=fig_size)
 for aufg in range(4):
-    meshpoints = int(round((bb-aa)/hh+0.5)) # aufrunden
+    meshpoints = int(round((bb-aa)/hh+0.500001)) # aufrunden
     tt = np.arange(meshpoints)
     tt = aa + tt * hh
     xx = euler(aa, bb, hh, x_0[aufg], ff,tt,meshpoints)
@@ -92,6 +90,6 @@ plt.tick_params(labelsize=fig_labelsize)
 plt.savefig("Zettel1/figures/A1-bc.png")
 plt.show()
 print('Interpretation: Halbierung der Schrittweite kann den Unterschied\n'
-    'zwischen Chaos und Lösung darstellen. Bei zu kleiner Schrittweite\n' 
+    'zwischen Chaos und Lösung darstellen. Bei zu kleiner Schrittweite\n'
     'findet eine Oszillation zwischen Funktionswerten statt.')
 # %%
