@@ -44,7 +44,7 @@ def euler(aa, bb, hh, x_0, ff, tt, meshpoints):
     xx = np.zeros(meshpoints)
     xx[0] = x_0
     for i in range(1, meshpoints):
-        xx[i] = xx[i-1] + hh * ff(tt[i], xx[i-1])
+        xx[i] = xx[i-1] + hh * ff(tt[i-1], xx[i-1])
     return xx
 
 aa = 0.0
