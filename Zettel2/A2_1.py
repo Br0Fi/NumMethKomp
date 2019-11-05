@@ -15,22 +15,20 @@ matplotlib.rcParams.update({'font.size': fig_labelsize})
 colors = dict(mcolors.BASE_COLORS, **mcolors.CSS4_COLORS)
 
 #Aufgabenspezifische Konstanten:
-a = 0.004
-b = 50.0
-c = 0.75
-d = 0.001
-e = 100.0
-f = 3.0
+a = 2.0
+b = 0.02
+c = 0.0002
+d = 0.8
 
 # Hauptprogramm:
 
 # Numerische Konstanten:
 t0 = 0
-T = 400
-h = 0.1
-# Anfangswerte, nicht spezifiziert durch Aufgabe.
-x0 = 50
-y0 = 60
+T = 50
+h = 0.01
+# Anfangswerte
+x0 = 5000
+y0 = 120
 
 # verwende "ein klassisches RK4":
 def rk4_2d(t0,x0,y0,T,h):
@@ -41,9 +39,9 @@ def rk4_2d(t0,x0,y0,T,h):
     x[0] = x0
     y[0] = y0
     def fx(x_arg, y_arg):
-        return a*x_arg * (b-x_arg-c*y_arg)
+        return a*x_arg - b*x_arg*y_arg
     def fy(x_arg, y_arg):
-        return d*y_arg * (e-y_arg-f*x_arg)
+        return c*x_arg*y_arg - d*y_arg
 
     for i in range(N):
         kx1 = fx(x[i],             y[i]            )
@@ -61,7 +59,7 @@ def rk4_2d(t0,x0,y0,T,h):
 
 
 fig, ax1 = plt.subplots(figsize=fig_size)
-plt.title("Wettbewerbsmodell, x0 = " + str(x0) + ", y0 = " + str(y0) + ", h = " + str(h))
+plt.title("Räuber-Beute-Modell, x0 = " + str(x0) + ", y0 = " + str(y0) + ", h = " + str(h))
 
 t, x, y = rk4_2d(t0, x0, y0, T, h)
 
@@ -78,35 +76,25 @@ ax2.set_ylabel('y', color=color)
 ax2.plot(t,y, label="y(t)", color=color) # not sure how to display this label.
 ax2.tick_params(axis='y', labelsize=fig_labelsize, labelcolor=color)
 fig.tight_layout()
-#plt.savefig("Zettel2/figures/A1-3.png")
+# plt.savefig("Zettel2/figures/A2-1bonus.png")
 plt.show()
 
 
 # phasenraum:
 if(True):
-    x1 = np.linspace(-20.0,80.0,40)
-    y1 = np.linspace(-10.0,133.0,40)
+    x1 = np.linspace(0,8000.0,100)
+    y1 = np.linspace(0,200.0,100)
     x1, y1=np.meshgrid(x1, y1)
-    vx=a*x1*(b-x1-c*y1)
-    vy=d*y1*(e-y1-f*x1)
+    vx=a*x1 - b*x1*y1
+    vy=c*x1*y1 - d*y1
     fig1 = plt.figure(figsize=fig_size)
-    '''
-    Plot fixpoints of the system: (0,0) ,(20,40), (0,100), (50,0)
-    '''
-    plt.plot(50,0,'ro',markersize=10,markeredgecolor='r',markeredgewidth=2)
-    plt.plot(0,100,'ro',markersize=10,markeredgecolor='r',markeredgewidth=2)
-    plt.plot(20,40,'ro', markersize=10, markeredgecolor='r',markeredgewidth=2)
-    plt.plot(0,0,'ro', markersize=10, markeredgecolor='r',markeredgewidth=2)
-    #plt.plot(20,40, marker='o', markersize=10, markeredgecolor='r',mfc='None',markeredgewidth=2)
-    #plt.plot(0,0,marker='o',markersize=10, markeredgecolor='r',mfc='None',markeredgewidth=2)
     plt.xlabel("x",fontsize=16)
     plt.ylabel("y",fontsize=16)
     plt.tick_params(labelsize=fig_labelsize)
-    plt.xlim([-20,60])
-    plt.ylim([-10,133])
     plt.streamplot(x1,y1,vx,vy,color='b',linewidth=2)
 
     #plt.quiver(x1, y1, vx, vy, pivot='middle', headwidth=3, headlength=6)
+    #plt.savefig("Zettel2/figures/A2-phasenraum.png")
 
     plt.show()
 
