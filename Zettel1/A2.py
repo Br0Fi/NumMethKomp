@@ -14,9 +14,6 @@ from scipy import optimize
 import glob
 import os
 
-import json
-import periodic
-
 
 # Konstanten fuer einheitliche Darstellung
 
@@ -28,17 +25,18 @@ matplotlib.rcParams.update({'font.size': fig_labelsize})
 colors = dict(mcolors.BASE_COLORS, **mcolors.CSS4_COLORS)
 
 def euler(aa, bb, hh, x_0, ff, tt, meshpoints):
-    
+
     xx = np.zeros(meshpoints)
     xx[0] = x_0
     for i in range(1, meshpoints):
-        xx[i] = xx[i-1] + hh * ff(tt[i], xx[i-1])
+        xx[i] = xx[i-1] + hh * ff(tt[i-1], xx[i-1])
     return xx
 def heun(aa, bb, hh, x_0, ff, tt, meshpoints):
-    
+
     xx = np.zeros(meshpoints)
     xx[0] = x_0
     for i in range(1, meshpoints):
+        xx[i] = xx[i-1] + hh * ff(tt[i-1], xx[i-1])
         xx[i] = xx[i-1] + hh/2 * (ff(tt[i-1], xx[i-1]) + ff(tt[i], xx[i]))
     return xx
 
