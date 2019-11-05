@@ -1,18 +1,11 @@
 # Importanweisungen
 import matplotlib.patches as mpatches
 import numpy as np
-import statistics as stat
-import scipy as sci
-import scipy.fftpack
-import sympy as sym
 import matplotlib.pyplot as plt
 import matplotlib
 import matplotlib.axes as axes
 from matplotlib import colors as mcolors
 import math
-from scipy import optimize
-import glob
-import os
 
 
 # Konstanten fuer einheitliche Darstellung
