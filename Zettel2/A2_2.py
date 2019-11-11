@@ -78,7 +78,7 @@ ax2.set_ylabel('y', color=color)
 ax2.plot(t,y, label="y(t)", color=color) # not sure how to display this label.
 ax2.tick_params(axis='y', labelsize=fig_labelsize, labelcolor=color)
 fig.tight_layout()
-plt.savefig("Zettel2/figures/A2-2-2.png")
+#plt.savefig("Zettel2/figures/A2-2-2.png")
 plt.show()
 
 
