@@ -46,14 +46,14 @@ def rk4_2d(t0,x0,y0,T,h):
         return c*x_arg*y_arg - d*y_arg
 
     for i in range(N):
-        kx1 = fx(x[i],             y[i]            , t[i])
-        ky1 = fy(x[i],             y[i]            , t[i])
-        kx2 = fx(x[i] + h/2 * kx1, y[i] + h/2 * ky1, t[i])
-        ky2 = fy(x[i] + h/2 * kx1, y[i] + h/2 * ky1, t[i])
-        kx3 = fx(x[i] + h/2 * kx2, y[i] + h/2 * ky2, t[i])
-        ky3 = fy(x[i] + h/2 * kx2, y[i] + h/2 * ky2, t[i])
-        kx4 = fx(x[i] + h   * kx3, y[i] + h   * ky3, t[i])
-        ky4 = fy(x[i] + h   * kx3, y[i] + h   * ky3, t[i])
+        kx1 = fx(x[i],             y[i]            , t[i] +h/2)
+        ky1 = fy(x[i],             y[i]            , t[i] +h/2)
+        kx2 = fx(x[i] + h/2 * kx1, y[i] + h/2 * ky1, t[i] +h/2)
+        ky2 = fy(x[i] + h/2 * kx1, y[i] + h/2 * ky1, t[i] +h/2)
+        kx3 = fx(x[i] + h/2 * kx2, y[i] + h/2 * ky2, t[i] +h/2)
+        ky3 = fy(x[i] + h/2 * kx2, y[i] + h/2 * ky2, t[i] +h/2)
+        kx4 = fx(x[i] + h   * kx3, y[i] + h   * ky3, t[i] +h/2)
+        ky4 = fy(x[i] + h   * kx3, y[i] + h   * ky3, t[i] +h/2)
 
         x[i+1] = x[i] + h/6 * (kx1 + 2*kx2 + 2*kx3 + kx4)
         y[i+1] = y[i] + h/6 * (ky1 + 2*ky2 + 2*ky3 + ky4)
