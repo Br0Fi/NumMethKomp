@@ -35,8 +35,8 @@ low_cut = 10000
 xy_cutoff = 8000 + low_cut
 
 # verwende "ein klassisches RK4":
-def rk4_2d(t0,x0,y0,T,h):
-    N = int(T/h)
+def rk4_2d(t0,x0,y0,T,h, omega):
+    N = int((T-t0)/h)
     t = np.linspace(t0, T, N+1)
     x = np.empty(N+1)
     y = np.empty(N+1)
@@ -67,7 +67,7 @@ fig, ax1 = plt.subplots(figsize=fig_size)
 plt.title("Pohlsches Rad, x0 = " + str(round(x0, 5)) +
         ", y0 = " + str(y0) + ", h = " + str(h) +", Omega= " + str(omega))
 
-t, x, y = rk4_2d(t0, x0, y0, T, h)
+t, x, y = rk4_2d(t0, x0, y0, T, h, omega)
 
 color = "tab:red"
 ax1.set_xlabel('t')
