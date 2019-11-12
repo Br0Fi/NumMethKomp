@@ -25,63 +25,67 @@ y0 = 0.5
 
 # Numerische Konstanten:
 t0 = -1
-T = 25
-h = 0.002
+T = 40
+h = 0.01
+
 # Anfangswerte
 
 
 # verwende "ein klassisches RK4":
-def rk4_2d(t0,x0,y0,z0,T,h):
-    N = int(T/h)
+def rk4_2d(t0,y0,T,h, lambwo):
+    N = int((T-t0)/h)
     t = np.linspace(t0, T, N+1)
-    x = np.empty(N+1)
+    h_inv = int(round(1/h))
     y = np.empty(N+1)
-    z = np.empty(N+1)
-    x[0] = x0
-    y[0] = y0
-    z[0] = y0
-    def fx(x_arg, y_arg, z_arg, t_arg):
-        return sigma * (y_arg - x_arg)
-    def fy(x_arg, y_arg, z_arg, t_arg):
-        return rr*x_arg - y_arg - x_arg * z_arg
-    def fz(x_arg, y_arg, z_arg, t_arg):
-        return x_arg * y_arg - bb * z_arg
+    y[:h_inv+1] = y0
+    def fy(y_arg, ym1_arg):
+        erg = lambwo * y_arg * (1-ym1_arg)
+        return erg
 
-    for i in range(N):
-        kx1 = fx(x[i],             y[i]            , z[i], t[i])
-        ky1 = fy(x[i],             y[i]            , z[i], t[i])
-        kz1 = fz(x[i],             y[i]            , z[i], t[i])
-        kx2 = fx(x[i] + h/2 * kx1, y[i] + h/2 * ky1, z[i]+h/2*kz1, t[i] +h/2)
-        ky2 = fy(x[i] + h/2 * kx1, y[i] + h/2 * ky1, z[i]+h/2*kz1, t[i] +h/2)
-        kz2 = fz(x[i] + h/2 * kx1, y[i] + h/2 * ky1, z[i]+h/2*kz1, t[i] +h/2)
-        kx3 = fx(x[i] + h/2 * kx2, y[i] + h/2 * ky2, z[i]+h/2*kz2, t[i] +h/2)
-        ky3 = fy(x[i] + h/2 * kx2, y[i] + h/2 * ky2, z[i]+h/2*kz2, t[i] +h/2)
-        kz3 = fz(x[i] + h/2 * kx2, y[i] + h/2 * ky2, z[i]+h/2*kz2, t[i] +h/2)
-        kx4 = fx(x[i] + h   * kx3, y[i] + h   * ky3, z[i]+h*kz3, t[i] +h)
-        ky4 = fy(x[i] + h   * kx3, y[i] + h   * ky3, z[i]+h*kz3, t[i] +h)
-        kz4 = fz(x[i] + h   * kx3, y[i] + h   * ky3, z[i]+h*kz3, t[i] +h)
+    for i in range(h_inv,N):
+        ky1 = fy(y[i], y[i-h_inv])
+        ky2 = fy(y[i] + h/2 * ky1, y[i-h_inv])
+        ky3 = fy(y[i] + h/2 * ky2, y[i-h_inv])
+        ky4 = fy(y[i] + h   * ky3, y[i-h_inv])
 
-        x[i+1] = x[i] + h/6 * (kx1 + 2*kx2 + 2*kx3 + kx4)
         y[i+1] = y[i] + h/6 * (ky1 + 2*ky2 + 2*ky3 + ky4)
-        z[i+1] = z[i] + h/6 * (kz1 + 2*kz2 + 2*kz3 + kz4)
-    return t,x,y,z
+    return t,y
 
-k = 2
-N = int(T/h)
-t = np.linspace(t0, T, N+1)
-mü = lambertw(-lambwo, k)
-print(mü)
-ute = np.exp(mü*t)
-y = (1 + ute).real # not sure about how to plot the complex array...
+#k = 2
+#N = int(T/h)
+#t = np.linspace(t0, T, N+1)
+#mü = lambertw(-lambwo, k)
+#print(mü)
+#ute = np.exp(mü*t)
+#y = (1 + ute).real # not sure about how to plot the complex array...
+
+
+t, y = rk4_2d(t0, y0, T, h, lambwo)
 
 fig = plt.figure(figsize=fig_size)
-plt.plot(t, y,".",label="k= " + str(k))
+plt.title("Zeitverzögerung, y0 = " +
+        ", h = " + str(h) +", lambda= " + str(lambwo))
+plt.plot(t, y,".")
 plt.grid()
-plt.legend(prop={'size':fig_legendsize})
 plt.ylabel('y')
 plt.xlabel("t")
 plt.tick_params(labelsize=fig_labelsize)
-plt.title('Zeitverzögerung')
-#plt.savefig("Zettel3/figures/A3.png")
+plt.savefig("Zettel3/figures/A3.png")
+plt.show()
+# %%
+
+fig = plt.figure(figsize=fig_size)
+plt.title("Zeitverzögerung, y0 = " +
+        ", h = " + str(h) +", lambda= " + str(lambwo))
+for lambwo in [1.0, 1.8, 2.8, 3.0]:
+    t, y = rk4_2d(t0, y0, T, h, lambwo)
+    plt.plot(t, y,".", label="lambda = " + str(lambwo))
+
+plt.legend(prop={'size':fig_legendsize})
+plt.grid()
+plt.ylabel('y')
+plt.xlabel("t")
+plt.tick_params(labelsize=fig_labelsize)
+plt.savefig("Zettel3/figures/A3c.png")
 plt.show()
 # %%
