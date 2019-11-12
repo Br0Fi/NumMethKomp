@@ -81,7 +81,7 @@ ax2.set_ylabel('y', color=color)
 ax2.plot(t[low_cut:xy_cutoff],y[low_cut:xy_cutoff], label="y(t)", color=color)
 ax2.tick_params(axis='y', labelsize=fig_labelsize, labelcolor=color)
 fig.tight_layout()
-plt.savefig("Zettel3/figures/A1-" + part + ".png")
+#plt.savefig("Zettel3/figures/A1-" + part + ".png")
 plt.show()
 
 # %%
@@ -116,6 +116,6 @@ plt.grid()
 plt.ylabel('phi_(n+1)')
 plt.xlabel("phi_n")
 plt.tick_params(labelsize=fig_labelsize)
-plt.savefig("Zettel3/figures/A1-" + part + "-return.png")
+#plt.savefig("Zettel3/figures/A1-" + part + "-return.png")
 plt.show()
 # %%
