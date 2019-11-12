@@ -55,8 +55,8 @@ def rk4_2d(t0,x0,y0,T,h):
         ky2 = fy(x[i] + h/2 * kx1, y[i] + h/2 * ky1, t[i] +h/2)
         kx3 = fx(x[i] + h/2 * kx2, y[i] + h/2 * ky2, t[i] +h/2)
         ky3 = fy(x[i] + h/2 * kx2, y[i] + h/2 * ky2, t[i] +h/2)
-        kx4 = fx(x[i] + h   * kx3, y[i] + h   * ky3, t[i] +h/2)
-        ky4 = fy(x[i] + h   * kx3, y[i] + h   * ky3, t[i] +h/2)
+        kx4 = fx(x[i] + h   * kx3, y[i] + h   * ky3, t[i] +h)
+        ky4 = fy(x[i] + h   * kx3, y[i] + h   * ky3, t[i] +h)
 
         x[i+1] = x[i] + h/6 * (kx1 + 2*kx2 + 2*kx3 + kx4)
         y[i+1] = y[i] + h/6 * (ky1 + 2*ky2 + 2*ky3 + ky4)
