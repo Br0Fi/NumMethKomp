@@ -63,8 +63,8 @@ def rk4_2d(t0,y0,T,h, lambwo):
 t, y = rk4_2d(t0, y0, T, h, lambwo)
 
 fig = plt.figure(figsize=fig_size)
-plt.title("Zeitverzögerung, y0 = " +
-        ", h = " + str(h) +", lambda= " + str(lambwo))
+plt.title("Zeitverzögerung, y0 = " + str(y0)+
+        ", h = " + str(h) + ", lambda= "  + str(lambwo))
 plt.plot(t, y,".")
 plt.grid()
 plt.ylabel('y')
@@ -75,8 +75,8 @@ plt.show()
 # %%
 
 fig = plt.figure(figsize=fig_size)
-plt.title("Zeitverzögerung, y0 = " +
-        ", h = " + str(h) +", lambda= " + str(lambwo))
+plt.title("Zeitverzögerung, y0 = " + str(y0)+
+        ", h = " + str(h))
 for lambwo in [1.0, 1.8, 2.8, 3.0]:
     t, y = rk4_2d(t0, y0, T, h, lambwo)
     plt.plot(t, y,".", label="lambda = " + str(lambwo))
