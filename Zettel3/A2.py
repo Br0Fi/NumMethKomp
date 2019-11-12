@@ -17,21 +17,21 @@ colors = dict(mcolors.BASE_COLORS, **mcolors.CSS4_COLORS)
 #Aufgabenspezifische Konstanten:
 sigma = 10
 bb = 8/3
-rr = 0.5
-part = "a"
+rr = 25
+part = "d"
 
 # Hauptprogramm:
 
 # Numerische Konstanten:
 t0 = 0
 T = 200
-h = 0.005
+h = 0.001
 # Anfangswerte
-x0 = 50
-y0 = 50
-z0 = 50
+x0 = 1
+y0 = 2
+z0 = 3
 low_cut = 0
-xy_cutoff = 0 + low_cut
+
 
 # verwende "ein klassisches RK4":
 def rk4_2d(t0,x0,y0,z0,T,h):
@@ -47,7 +47,7 @@ def rk4_2d(t0,x0,y0,z0,T,h):
         return sigma * (y_arg - x_arg)
     def fy(x_arg, y_arg, z_arg, t_arg):
         return rr*x_arg - y_arg - x_arg * z_arg
-    def fz(x_arg, y_arg, t_arg):
+    def fz(x_arg, y_arg, z_arg, t_arg):
         return x_arg * y_arg - bb * z_arg
 
     for i in range(N):
@@ -77,20 +77,21 @@ plt.title("Lorenz-System, x0 = " + str(round(x0, 5)) +", y0 = " + str(y0) +
 t, x, y, z = rk4_2d(t0, x0, y0, z0, T, h)
 
 color = "tab:red"
-plt.legend(prop={'size':fig_legendsize})
 ax1.set_xlabel('t')
-ax1.set_ylabel('x, z', color=color)
-ax1.plot(t[low_cut:xy_cutoff], x[low_cut:xy_cutoff], label="x(t)", color=color)
-ax1.plot(t[low_cut:xy_cutoff], x[low_cut:xy_cutoff], label="z(t)", color="tab:green")
+ax1.set_ylabel('x, y, z')
+ax1.plot(t[low_cut:], x[low_cut:], label="x(t)", color=color)
+ax1.plot(t[low_cut:], y[low_cut:], label="y(t)", color="tab:blue")
+ax1.plot(t[low_cut:], z[low_cut:], label="z(t)", color="tab:green")
+ax1.legend(prop={'size':fig_legendsize})
 plt.grid()
-ax1.tick_params(axis='y', labelsize=fig_labelsize, labelcolor=color)
-ax2 = ax1.twinx() # instantiate a second axes that shares the same x-axis
-color = "tab:blue"
-ax2.set_ylabel('y', color=color)
-ax2.plot(t[low_cut:xy_cutoff],y[low_cut:xy_cutoff], label="y(t)", color=color)
-ax2.tick_params(axis='y', labelsize=fig_labelsize, labelcolor=color)
-fig.tight_layout()
-#plt.savefig("Zettel3/figures/A2-" + part + ".png")
+ax1.tick_params(axis='y', labelsize=fig_labelsize)
+#ax2 = ax1.twinx() # instantiate a second axes that shares the same x-axis
+#color = "tab:blue"
+#ax2.set_ylabel('y', color=color)
+#ax2.plot(t[low_cut:],y[low_cut:], label="y(t)", color=color)
+#ax2.tick_params(axis='y', labelsize=fig_labelsize, labelcolor=color)
+#fig.tight_layout()
+# plt.savefig("Zettel3/figures/A2-" + part + ".png")
 plt.show()
 
 # %%
@@ -123,8 +124,8 @@ plt.plot(phi_n, phi_n1,".")
 
 plt.grid()
 plt.ylabel('z_max(n+1)')
-plt.xlabel("Z_max(n)")
+plt.xlabel("z_max(n)")
 plt.tick_params(labelsize=fig_labelsize)
-#plt.savefig("Zettel3/figures/A2-" + part + "-return.png")
+# plt.savefig("Zettel3/figures/A2-" + part + "-return.png")
 plt.show()
 # %%
