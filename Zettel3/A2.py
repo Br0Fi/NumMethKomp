@@ -51,9 +51,9 @@ def rk4_2d(t0,x0,y0,z0,T,h):
         return x_arg * y_arg - bb * z_arg
 
     for i in range(N):
-        kx1 = fx(x[i],             y[i]            , z[i], t[i] +h/2)
-        ky1 = fy(x[i],             y[i]            , z[i], t[i] +h/2)
-        kz1 = fz(x[i],             y[i]            , z[i], t[i] +h/2)
+        kx1 = fx(x[i],             y[i]            , z[i], t[i])
+        ky1 = fy(x[i],             y[i]            , z[i], t[i])
+        kz1 = fz(x[i],             y[i]            , z[i], t[i])
         kx2 = fx(x[i] + h/2 * kx1, y[i] + h/2 * ky1, z[i]+h/2*kz1, t[i] +h/2)
         ky2 = fy(x[i] + h/2 * kx1, y[i] + h/2 * ky1, z[i]+h/2*kz1, t[i] +h/2)
         kz2 = fz(x[i] + h/2 * kx1, y[i] + h/2 * ky1, z[i]+h/2*kz1, t[i] +h/2)
@@ -85,13 +85,7 @@ ax1.plot(t[low_cut:], z[low_cut:], label="z(t)", color="tab:green")
 ax1.legend(prop={'size':fig_legendsize})
 plt.grid()
 ax1.tick_params(axis='y', labelsize=fig_labelsize)
-#ax2 = ax1.twinx() # instantiate a second axes that shares the same x-axis
-#color = "tab:blue"
-#ax2.set_ylabel('y', color=color)
-#ax2.plot(t[low_cut:],y[low_cut:], label="y(t)", color=color)
-#ax2.tick_params(axis='y', labelsize=fig_labelsize, labelcolor=color)
-#fig.tight_layout()
-# plt.savefig("Zettel3/figures/A2-" + part + ".png")
+#plt.savefig("Zettel3/figures/A2-" + part + ".png")
 plt.show()
 
 # %%
@@ -126,6 +120,6 @@ plt.grid()
 plt.ylabel('z_max(n+1)')
 plt.xlabel("z_max(n)")
 plt.tick_params(labelsize=fig_labelsize)
-# plt.savefig("Zettel3/figures/A2-" + part + "-return.png")
+#plt.savefig("Zettel3/figures/A2-" + part + "-return.png")
 plt.show()
 # %%

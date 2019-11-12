@@ -19,8 +19,8 @@ ks = 0.799
 ds = 9.44
 ns = 14.68
 fs = 2.1
-omega = 2.25
-part = "d"
+omega = 2.5
+part = "a"
 
 # Hauptprogramm:
 
@@ -49,8 +49,8 @@ def rk4_2d(t0,x0,y0,T,h, omega):
                - ks*y_arg + ns*math.sin(x_arg)
 
     for i in range(N):
-        kx1 = fx(x[i],             y[i]            , t[i] +h/2)
-        ky1 = fy(x[i],             y[i]            , t[i] +h/2)
+        kx1 = fx(x[i],             y[i]            , t[i])
+        ky1 = fy(x[i],             y[i]            , t[i])
         kx2 = fx(x[i] + h/2 * kx1, y[i] + h/2 * ky1, t[i] +h/2)
         ky2 = fy(x[i] + h/2 * kx1, y[i] + h/2 * ky1, t[i] +h/2)
         kx3 = fx(x[i] + h/2 * kx2, y[i] + h/2 * ky2, t[i] +h/2)
