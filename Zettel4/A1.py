@@ -24,7 +24,7 @@ colors = dict(mcolors.BASE_COLORS, **mcolors.CSS4_COLORS)
 t0 = 0.
 N = 2**13
 h_start = 0.1
-eps_0 = 1E-2
+eps_0 = 1E-4
 beta_ctrl = 0.9
 # Anfangswerte
 x0 = np.array([2.0,0.0])
