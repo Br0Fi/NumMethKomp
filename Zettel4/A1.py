@@ -55,9 +55,21 @@ for i in range(4):
     plt.title("Van-der-Pol-Oszi, $\mu$ = {:.3g}".format(mu), fontsize=fig_fontsize)
     plt.xlabel('$x$',fontsize=fig_fontsize)
     plt.ylabel('$y$',fontsize=fig_fontsize)
-
     plt.plot(x[:,0],x[:,1],'g',linewidth=2)
 
+    # plotte Zeit
+    plt.figure(figsize=fig_size)
+    plt.title("Van-der-Pol-Oszi, $\mu$ = {:.3g}".format(mu), fontsize=fig_fontsize)
+    plt.xlabel('$n(t)$',fontsize=fig_fontsize)
+    plt.ylabel('$t$',fontsize=fig_fontsize)
+    plt.plot(np.arange(len(t)), t ,'g',linewidth=2)
+
+    # plotte Realraum
+    plt.figure(figsize=fig_size)
+    plt.title("Van-der-Pol-Oszi, $\mu$ = {:.3g}".format(mu), fontsize=fig_fontsize)
+    plt.xlabel('$t$',fontsize=fig_fontsize)
+    plt.ylabel('$x$',fontsize=fig_fontsize)
+    plt.plot(t, x[:,0] ,'g',linewidth=2)
     #plt.savefig('B3_A1{}.png'.format(teil[i]))
 
 plt.show()

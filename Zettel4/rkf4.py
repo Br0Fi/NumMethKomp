@@ -58,7 +58,7 @@ def rkf(t0, x0, N, h_start, rhs, eps_0, beta_ctrl):
         # calculate the next step
         x1 = calc_x(t[i], x[i], h, rhs, 4) # for rk4
         x2 = calc_x(t[i], x[i], h, rhs, 5) # for rk5
-        t[i] = t0 + h
+        #t[i] = t0 + h
         eps = np.abs(x1[0]-x2[0]) # see above the def
         if eps<eps_0: # check if any eps is larger than eps_0
             if(eps!=0.):
