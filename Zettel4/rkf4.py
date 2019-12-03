@@ -1,4 +1,4 @@
-## RK4-METHOD
+## RKF(4,5)-METHOD
 ## numerical integration of x' = rhs(t,x) over time interval [t0,T] with time step h and initial condition x(t0)=x0
 ## x can have arbitrary dimension, according to the dimension of x0 and the output of rhs
 
@@ -10,6 +10,7 @@ beta = [[0.], [1/4, 1/4], [3/8, 3/32, 9/32], [12/13, 1932/2197, -7200/2197, 7296
 cestar = [0., 16/135, 0, 6656/12825, 28561/56430, -9/50, 2/55]
 ce = [0., 25/216, 0, 1408/2565, 2197/4104, -1/5, 0] # for simplicities sake c_0 = c*_0 = 0 is added
 
+# calculate one step of RK4 or RK5
 def calc_x(t, x, h, rhs, stage): # stage = 4 oder 5
     k = np.empty([len(beta), len(x)]) # e.g. k_1 -> k_0
     xp = np.empty(len(x))
@@ -40,6 +41,7 @@ def calc_x(t, x, h, rhs, stage): # stage = 4 oder 5
 #test[0][1] = 42
 #print(test[0])
 
+# RUNGE KUTTA FEHLBERG
 # N is passed instead of T so that we can work with a fixed length array
 # it could be implemented to have eps_0 be an array with a value for each variable
 # you could use one epsilon_0 for all variables and as long as one error is larger than eps_0
@@ -53,9 +55,10 @@ def rkf(t0, x0, N, h_start, rhs, eps_0, beta_ctrl):
     h = h_start
     t[0] = t0
     for i in range(N-1):
-        x1 = calc_x(t[i], x[i], h, rhs, 4)
-        x2 = calc_x(t[i], x[i], h, rhs, 5)
-        t[i] = t0 + h
+        # calculate the next step
+        x1 = calc_x(t[i], x[i], h, rhs, 4) # for rk4
+        x2 = calc_x(t[i], x[i], h, rhs, 5) # for rk5
+        #t[i] = t0 + h
         eps = np.abs(x1[0]-x2[0]) # see above the def
         if eps<eps_0: # check if any eps is larger than eps_0
             if(eps!=0.):
