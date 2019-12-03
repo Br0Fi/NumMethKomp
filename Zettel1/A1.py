@@ -58,7 +58,7 @@ plt.legend(prop={'size':fig_legendsize})
 plt.ylabel('x')
 plt.xlabel("t")
 plt.tick_params(labelsize=fig_labelsize)
-plt.savefig("Zettel1/figures/A1-a.png")
+#plt.savefig("Zettel1/figures/A1-a.png")
 plt.show()
 # %%
 
@@ -80,7 +80,7 @@ plt.legend(prop={'size':fig_legendsize})
 plt.ylabel('x')
 plt.xlabel("t")
 plt.tick_params(labelsize=fig_labelsize)
-plt.savefig("Zettel1/figures/A1-bc.png")
+#plt.savefig("Zettel1/figures/A1-bc.png")
 plt.show()
 print('Interpretation: Halbierung der Schrittweite kann den Unterschied\n'
     'zwischen Chaos und Lösung darstellen. Bei zu kleiner Schrittweite\n'
