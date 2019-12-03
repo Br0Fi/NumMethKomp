@@ -27,13 +27,14 @@ T = 101
 size = 101
 rule30 = np.array([0, 0, 0, 1, 1, 1, 1, 0])
 rule90 = np.array([0, 1, 0, 1, 1, 0, 1, 0])
-    
+
 a = np.zeros((T, size)) # space on one axis, time on the other
 a[0][int(size/2)] = 1
 
 calc_field(a, rule30)
 plt.figure(figsize=fig_size)
 plt.imshow(a,interpolation='nearest',cmap=plt.cm.gray_r)
+#plt.savefig("Zettel5/img/A1.png")
 plt.show()
 
 a = np.zeros((T, size)) # space on one axis, time on the other
@@ -42,4 +43,5 @@ a[0][int(size/2)] = 1
 calc_field(a, rule90)
 plt.figure(figsize=fig_size)
 plt.imshow(a,interpolation='nearest',cmap=plt.cm.gray_r)
+#plt.savefig("Zettel5/img/A2.png")
 plt.show()
