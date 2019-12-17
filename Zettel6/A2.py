@@ -10,6 +10,8 @@ import sys, os
 sys.path.append('Zettel4/')
 from rkf4 import *
 
+# TODO Wie zur Hölle soll ich hier auf zwei Sachen gleichzeitig normieren? Und sonst hat man ja eigentlich wenigstens die Funktion links und rechts gegeben, statt verschiedener Ablietungen.
+
 # Konstanten fuer einheitliche Darstellung
 fig_size = (10, 6)
 fig_legendsize = 15
@@ -20,8 +22,8 @@ colors = dict(mcolors.BASE_COLORS, **mcolors.CSS4_COLORS)
 #Aufgabenspezifische Konstanten:
 s_max = 0
 s_min = -100
-x0 = 4
-xT = 1
+x0 = [1,0]
+xT = [-2, -3]
 t0 = 0
 T = 1
 h = 0.001
@@ -36,10 +38,13 @@ ds = 0.001
 
 
 def rhs(t, x):
-    x0,x1 = x[0],x[1]
+    x0,x1,x2,x3,x4 = x[0],x[1],x[2],x[3]
     rhs_0 = x1
-    rhs_1 = 3/2 * x0**2
-    return np.array([rhs_0,rhs_1])
+    #rhs_1 = x4 + 5*x0**2
+    rhs_2 = x3
+    rhs_3 = (1+t**2) * x2**2 - 5* x0**2
+    rhs_1 = rhs3 + 5*x0**2 # no idea, ob man das so machen kann
+    return np.array([rhs_0,rhs_1, rhs_2, rhs_3])
 
 def newton(x0, h, t0, T, eps, s_min, s_max, ds, rhs):
     sn = (s_max-s_min)/2 + s_min # starting point for newton in the middle of given interval
