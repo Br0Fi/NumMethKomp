@@ -53,7 +53,7 @@ FT_g = np.fft.fftshift(FT_g)
 
 """ Ableitung durch FFT """
 
-FFTg_prime = np.fft.ifft(1.0j*2*np.pi*k_vec*FT_g)
+FFTg_prime = np.fft.ifft(np.fft.ifftshift(1.0j*2*np.pi*k_vec*FT_g))
 
 
 plt.ion()
