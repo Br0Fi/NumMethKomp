@@ -1,0 +1,9 @@
+part1.py solves the first part of the task.
+The three gifs nu0, nu1 and nu2 show that the stiffness increases as nu decreases.
+For nu=0.003 and smaller we get an overflow error in line 37.
+
+part2.py solves the second part of the task.
+N=256 and N=128 looks fine without dealising.
+N=64 gives strange numeric effects without dealising for t>500 (N64.gif).
+Dealising makes it way worse and causes invalid value errors.
+
