@@ -29,12 +29,12 @@ u0= np.sin(x) # define an initial condition, mind mistake in exercise sheet
 uk = np.fft.fft(u0) # uk=fft(u0)
 
 def dealiase(u,k): #how is that spelled?
-	kmax= k[len(k)-1]
+	kmax= max(k)
 	for i in range(len(k)):
-		if k[i] >= 2/3 * kmax: u[i]=0
+		if k[i] >= 2/3*kmax or k[i] <= -2/3*kmax: u[i]=0
 	return u
 
-def rhs(nu,k,uk): # RHS of the ODE system in the Fourier space
+def rhs(nu,k,uk): # RHS in the Fourier space
 	uk = dealiase(uk,k)
 	dduk = 1j*k*uk # calculate derivative
 	NN = -1*np.fft.ifft(uk) * np.fft.ifft(dduk) # calculate the nonlinearity
@@ -61,6 +61,7 @@ for n in range(Tend+1): # RK4 time loop in Fourier space
 
         u = np.fft.ifft(uk)
         plt.cla() #clear axis
+        plt.ylim(-1,1)
         plt.plot(x,u.real,'r.') # plot the numerical solution
         plt.ylabel("u(x,t)")
         plt.xlabel("x")

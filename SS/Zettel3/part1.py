@@ -15,7 +15,7 @@ N = 256           #Number of points on [-L/2, L/2], N = 2^p
 Tend=1500           # t\in[0,Tend]
 h=0.01              # Time step
 nus=[0.01,0.007,0.004,0.001]
-nu=nus[3]
+nu=nus[1]
 
 """x = (np.arange(N)-N/2) * L/N #x-Array		# Interval [-pi,pi]
 k = np.zeros(N) #Definition of the wavenumbers		# Alternative definition of k-grid
@@ -31,7 +31,7 @@ uk = np.fft.fft(u0) # uk=fft(u0)
 def dealiase(u): #how is that spelled?
 	return u
 
-def rhs(nu,k,uk): # RHS of the ODE system in the Fourier space
+def rhs(nu,k,uk): # RHS in the Fourier space
 	uk = dealiase(uk)
 	dduk = 1j*k*uk # calculate derivative
 	NN = -1*np.fft.ifft(uk) * np.fft.ifft(dduk) # calculate the nonlinearity
@@ -58,6 +58,7 @@ for n in range(Tend+1): # RK4 time loop in Fourier space
 
         u = np.fft.ifft(uk)
         plt.cla() #clear axis
+        plt.ylim(-1,1)
         plt.plot(x,u.real,'r.') # plot the numerical solution
         plt.ylabel("u(x,t)")
         plt.xlabel("x")
