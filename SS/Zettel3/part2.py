@@ -10,7 +10,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-L = 2.0 * np.pi     #Interval length
+L = 4.0 * np.pi     #Interval length
 Ns = [256, 128, 64]           #Number of points on [-L/2, L/2], N = 2^p
 N = Ns[2]
 Tend=1500           # t\in[0,Tend]
@@ -21,7 +21,7 @@ nu=0.005
 k = np.zeros(N) #Definition of the wavenumbers		# Alternative definition of k-grid
 k[0:N/2+1] = np.arange(N/2+1)*2*np.pi/L
 k[N/2+1:] = np.arange(-N/2+1,0)*2*np.pi/L"""
-x = np.arange(N) * 2*L/N - L #x-Array from -2pi to 2pi
+x = np.arange(N) * L/N - L #x-Array from -2pi to 2pi
 dx=L/N
 k = np.fft.fftfreq(N,dx/(2.*np.pi))
 u0= np.sin(x) # define an initial condition, mind mistake in exercise sheet
