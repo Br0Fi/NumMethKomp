@@ -59,7 +59,7 @@ for n in range(Tend+1): # RK4 time loop in Fourier space
         plt.show()
         ii=ii+1
         filename = "pic{:03d}.png".format(ii)
-        plt.savefig("pics/"+filename)
+        #plt.savefig("pics/"+filename)
         plt.pause(0.01)# pause between frames
 
 
